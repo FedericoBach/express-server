@@ -12,6 +12,10 @@ router.use((req, res, next) => {
 
 router.get("/", (req, res) => res.send("Obtencion de libros."))
 
+router.get("/render", (req, res) => {
+    return res.render("books", {layout:"index"})
+})
+
 router.get("/:id", 
     (req, res, next) => {
         const {id} = req.params
@@ -25,8 +29,6 @@ router.get("/:id",
     },
     (req, res) => res.send(`Obtencion de libros ${req.params.id}.`)
 )
-
-
 
 router.post("/create", (req, res) => res.send("Creacion de libros."))
 
