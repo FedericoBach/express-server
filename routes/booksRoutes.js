@@ -1,5 +1,8 @@
 const express = require('express')
 
+//CONTROLLERS
+const {allBooksController, renderBooksController, bookByIdController, deleteBookController} = require("../controllers/books")
+
 const router = express.Router()
 
 router.use((req, res, next) => {
@@ -10,11 +13,9 @@ router.use((req, res, next) => {
     next()
 })
 
-router.get("/", (req, res) => res.send("Obtencion de libros."))
+router.get("/", allBooksController)
 
-router.get("/render", (req, res) => {
-    return res.render("books", {layout:"index"})
-})
+router.get("/render", renderBooksController)
 
 router.get("/:id", 
     (req, res, next) => {
@@ -27,19 +28,13 @@ router.get("/:id",
             next()
         }
     },
-    (req, res) => res.send(`Obtencion de libros ${req.params.id}.`)
+    bookByIdController
 )
-
-router.post("/create", (req, res) => res.send("Creacion de libros."))
 
 router.post("/create/:id", (req, res) => res.send(`Creacion de libro ${req.params.id}.`))
 
-router.put("/update", (req, res) => res.send("Actualizacion de libros."))
-
 router.put("/update/:id", (req, res) => res.send(`Actualizacion de libros ${req.params.id}.`))
 
-router.delete("/delete", (req, res) => res.send("Eliminacion de libros."))
-
-router.delete("/delete/:id", (req, res) => res.send(`Eliminacion de libros ${req.params.id}.`))
+router.delete("/delete/:id", deleteBookController)
 
 module.exports = router
