@@ -6,6 +6,8 @@ const autorsRoutes = require('./routes/autorsRoutes')
 
 const app = express()
 
+app.use(express.json())
+
 app.set('view engine', 'hbs')
 
 app.engine('hbs', handlebars({
@@ -19,4 +21,5 @@ app.get("/", (req, res) => res.send("hola mundo"))
 app.use("/books", booksRoutes)
 app.use("/autors", autorsRoutes)
 
-app.listen(5000, () => console.log("Servidor levantado en el puerto", 5000))
+const PORT = process.env.PORT
+app.listen(PORT, () => console.log("Servidor levantado en el puerto", PORT))

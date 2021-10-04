@@ -1,2 +1,10 @@
 <h1>Obtencion de autores</h1>
+{{#if hasAutors}}
+    <h2>Hay autores</h2>
+{{/if}}
+<ul>
+    {{#each autors}}
+        <li>{{this.name}} {{this.id}}</li>
+    {{/each}}
+</ul>
 {{> footer}}

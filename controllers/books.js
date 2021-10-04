@@ -1,5 +1,5 @@
 //MODELS
-const {allBooks, bookById, deleteBook} = require("../models/books")
+const {allBooks, bookById, deleteBook, createBook, updateBook} = require("../models/books")
 module.exports.allBooksController = async (req, res) => {
     try{
         const books = await allBooks()
@@ -28,6 +28,27 @@ module.exports.bookByIdController = async (req, res) => {
         const book = await bookById(id)
         return res.send(book)
     }catch(err){
+        return res.send("Se produjo un error")
+    }
+}
+
+module.exports.createBookController = async (req, res) => {
+    const {name, publish_date, disponible} = req.body
+    try{
+        const book = await createBook({name, publish_date, disponible})
+        return res.send(book)
+    } catch(err) {
+        return res.send("Se produjo un error")
+    }
+}
+
+module.exports.updateBookController = async (req, res) => {
+    const {id, name, publish_date, disponible} = req.body
+
+    try{
+        const book = await updateBook({id, name, publish_date, disponible})
+        return res.send(book)
+    } catch(err) {
         return res.send("Se produjo un error")
     }
 }

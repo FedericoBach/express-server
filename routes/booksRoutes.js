@@ -1,7 +1,14 @@
 const express = require('express')
 
 //CONTROLLERS
-const {allBooksController, renderBooksController, bookByIdController, deleteBookController} = require("../controllers/books")
+const {
+    allBooksController, 
+    renderBooksController, 
+    bookByIdController, 
+    createBookController,
+    deleteBookController, 
+    updateBookController
+} = require("../controllers/books")
 
 const router = express.Router()
 
@@ -31,9 +38,9 @@ router.get("/:id",
     bookByIdController
 )
 
-router.post("/create/:id", (req, res) => res.send(`Creacion de libro ${req.params.id}.`))
+router.post("/create", createBookController)
 
-router.put("/update/:id", (req, res) => res.send(`Actualizacion de libros ${req.params.id}.`))
+router.put("/update", updateBookController)
 
 router.delete("/delete/:id", deleteBookController)
 
