@@ -1,12 +1,11 @@
 const mysql = require("mysql")
-
+const config = require('./db.config')
 module.exports.request = (query) => new Promise((res, rej) => {
     const connection = mysql.createConnection({
-        host: 'localhost',
-        port: 3306,
-        user: 'pdtc',
-        password: 'pdtc',
-        database: 'pdtc'
+        host: config.HOST,
+        user: config.USER,
+        password: config.PASSWORD,
+        database: config.DB
     })
 
     connection.query(query, (error, data, fields) => {
