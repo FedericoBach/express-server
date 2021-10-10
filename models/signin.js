@@ -1,5 +1,8 @@
 const {request} = require("../db/request")
 
+//UTILS
+const { comparePassword } = require("../utils/password")
+
 module.exports.signinLector = async (user, password) => {
     const data = await request(`
         SELECT 
@@ -9,7 +12,7 @@ module.exports.signinLector = async (user, password) => {
         WHERE email = '${user}'
     `)
 
-    if(data.length){
+    if(data.length && comparePassword(password, data[0].password)){
         return {
             user: data[0],
             existUser: true
