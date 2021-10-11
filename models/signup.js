@@ -15,3 +15,16 @@ module.exports.signupLector = async (user, password) => {
         user
     }
 }
+
+module.exports.signupAutor = async (user, password) => {
+    const hashedPassword = hashPassword(password)
+    const data = await request(`
+        INSERT INTO users(email, password, type)
+        VALUES('${user}', '${hashedPassword}', "AUTOR")
+    `)
+
+    return {
+        id: data.insertId,
+        user
+    }
+}

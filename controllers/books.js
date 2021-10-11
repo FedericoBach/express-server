@@ -15,7 +15,9 @@ module.exports.renderBooksController = async (req, res) => {
         return res.render("books", {
             layout:"index", 
             books: books.books, 
-            hasBooks:books.books.length ? true: false
+            hasBooks:books.books.length ? true: false,
+            shouldRenderLogout: true,
+            redirectPath: "/logout/lector"
         })
     }catch(err){
         return res.send("Se produjo un error")

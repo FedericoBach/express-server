@@ -1,10 +1,10 @@
-<form action="/signin/lector">
-    <h2>Login de lectores</h2>
+<form action="/signup/autor">
+    <h2>Signup de autores</h2>
     <label for="email">Email</label>
     <input type="text" name="email" required autocomplete="off">
     <label for="password">Password</label>
     <input type="password" name="password" required>
-    <button>Iniciar sesion</button>
+    <button>Registrarse</button>
 </form>
 <script>
     const form = document.querySelector("form")
@@ -12,19 +12,15 @@
         e.preventDefault()
         const email = form.email.value
         const password = form.password.value
+
         try{            
-            const res = await fetch('/signin/lector', {
+            const res = await fetch('/signup/autor', {
                 method: "POST",
                 body: JSON.stringify({email, password}),
                 headers: {'Content-Type': 'application/json'}
             })
             const data = await res.json()
-            
-            if(data.hasUser === true){
-                window.location.assign("/books/render")
-            } else {
-                window.location.assign("/signin/lector")
-            }
+            console.log(data)
         }catch(err){
             console.log(err)
         }

@@ -10,6 +10,9 @@ const {
     updateBookController
 } = require("../controllers/books")
 
+//MIDDLEWARES
+const {requiresLoginMiddleware} = require("../middlewares/protectedRoutes")
+
 const router = express.Router()
 
 router.use((req, res, next) => {
@@ -19,6 +22,8 @@ router.use((req, res, next) => {
 
     next()
 })
+
+router.use("/*", requiresLoginMiddleware)
 
 router.get("/", allBooksController)
 

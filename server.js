@@ -6,7 +6,7 @@ const booksRoutes = require('./routes/booksRoutes')
 const autorsRoutes = require('./routes/autorsRoutes')
 const signupRoutes = require('./routes/signupRoutes')
 const signinRoutes = require('./routes/signinRoutes')
-
+const logoutRoutes = require('./routes/logoutRoutes')
 
 const app = express()
 
@@ -27,6 +27,7 @@ app.use("/signup", signupRoutes)
 app.use("/signin", signinRoutes)
 app.use("/books", booksRoutes)
 app.use("/autors", autorsRoutes)
+app.use("/logout", logoutRoutes)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => console.log("Servidor levantado en el puerto", PORT))

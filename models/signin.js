@@ -23,3 +23,26 @@ module.exports.signinLector = async (user, password) => {
         }
     }
 }
+
+module.exports.signinAutor = async (user, password) => {
+    const data = await request(`
+        SELECT 
+            email AS user,
+            password
+        FROM users
+        WHERE email = '${user}'
+        AND type = "AUTOR"
+    `)
+
+    if(data.length && comparePassword(password, data[0].password)){
+        delete password
+        return {
+            user: data[0],
+            existUser: true
+        }
+    } else {
+        return {
+            existUser: false
+        }
+    }
+}
