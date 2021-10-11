@@ -5,7 +5,7 @@ const {generateCookieDaysDurationInMs} = require("../utils/time")
 const {createToken} = require("../utils/token")
 
 module.exports.renderSigninLectorController = (req, res) => {
-    return res.render("signinLector", {layout: "index"})
+    return res.render("signinLector", {layout: "index", shouldRenderLogout:false})
 }
 
 module.exports.signinLectorController = async (req, res) => {
