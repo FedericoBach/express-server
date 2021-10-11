@@ -1,25 +1,32 @@
 const express = require('express')
 
+//CONTROLLERS
+const {
+    allAutorsController, 
+    renderAutorsController, 
+    autorByIdController, 
+    createAutorController,
+    updateAutorController,
+    deleteAutorController
+} = require('../controllers/autors')
+
+//MIDDLEWARES
+const { requiresAutorLoginMiddleware } = require('../middlewares/protectedRoutes')
+
 const router = express.Router()
 
-router.get("/", (req, res) => res.send("Obtencion de autores."))
+router.use("/*", requiresAutorLoginMiddleware)
 
-router.get("/render", (req, res) => {
-    return res.render("autors", {layout:"index"})
-})
+router.get("/", allAutorsController)
 
-router.get("/:id", (req, res) => res.send(`Obtencion de autores ${req.params.id}.`))
+router.get("/render", renderAutorsController)
 
-router.post("/create", (req, res) => res.send("Creacion de autores."))
+router.get("/:id", autorByIdController)
 
-router.post("/create/:id", (req, res) => res.send(`Creacion de autores ${req.params.id}.`))
+router.post("/create", createAutorController)
 
-router.put("/update", (req, res) => res.send("Actualizacion de autores."))
+router.put("/update/:id", updateAutorController)
 
-router.put("/update/:id", (req, res) => res.send(`Actualizacion de autores ${req.params.id}.`))
-
-router.delete("/delete", (req, res) => res.send("Eliminacion de autores."))
-
-router.delete("/delete/:id", (req, res) => res.send(`Eliminacion de autores ${req.params.id}.`))
+router.delete("/delete/:id", deleteAutorController)
 
 module.exports = router
