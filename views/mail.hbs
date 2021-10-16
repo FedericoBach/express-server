@@ -1,0 +1,39 @@
+<form action="/mail">
+    <h2>mail de lectores</h2>
+    <label for="name">nombre</label>
+    <input type="text" name="name" required autocomplete="off">
+    <label for="contact">contacto</label>
+    <input type="text" name="contact" required autocomplete="off">
+    <div>
+        <label for="message">mensaje</label>
+        <textarea type="text" name="message" required></textarea>
+    </div>
+
+    <button>Enviar</button>
+</form>
+<script>
+    const form = document.querySelector("form")
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        const name = form.name.value
+        const contact = form.contact.value
+        const message = form.message.value
+        try{     
+            const res = await fetch('/mail', {
+                method: "POST",
+                body: JSON.stringify({name, contact, message}),
+                headers: {'Content-Type': 'application/json'}
+            })
+            const data = await res.json()
+            
+            console.log(data)
+            if(data.sended){
+                window.location.assign("/mail")
+            }
+        }catch(err){
+            console.log(err)
+        }
+    })
+</script>
+
+{{> footer}}

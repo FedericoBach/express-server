@@ -15,7 +15,9 @@ module.exports.renderAutorsController = async (req, res) => {
         return res.render("autors", {
             layout:"index", 
             autors: autors.autors, 
-            hasAutors:autors.autors.length ? true: false
+            hasAutors:autors.autors.length ? true: false,
+            shouldRenderLogout: true,
+            redirectPath: "/logout/autor"
         })
     }catch(err){
         return res.send("Se produjo un error")

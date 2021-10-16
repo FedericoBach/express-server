@@ -9,11 +9,12 @@ const {
 } = require("../controllers/signin")
 
 //MIDDLEWARES
-const {redirectLoguedUserMiddleware} = require("../middlewares/protectedRoutes")
+const {redirectLoguedUserMiddleware, redirectLoguedAutorMiddleware} = require("../middlewares/protectedRoutes")
 
 const router = express.Router()
 
-router.use("/*", redirectLoguedUserMiddleware)
+router.use("/lector", redirectLoguedUserMiddleware)
+router.use("/autor", redirectLoguedAutorMiddleware)
 
 router.get("/lector", renderSigninLectorController)
 router.get("/autor", renderSigninAutorController)

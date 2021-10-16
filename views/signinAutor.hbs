@@ -20,6 +20,12 @@
             })
             const data = await res.json()
             console.log(data)
+
+            if(data.hasAutors === true){
+                window.location.assign("/autors/render")
+            } else {
+                window.location.assign("/signin/autor")
+            }
         }catch(err){
             console.log(err)
         }
