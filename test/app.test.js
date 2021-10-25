@@ -9,7 +9,7 @@ describe("GET /books", () => {
     })
 })
 
-describe("POST /login/lector", () => {
+describe("POST /signin/lector", () => {
     test("Should respond with a 200 status code", async() => {
         const response = await request(app).post("/signin/lector").send({
             email: "pdtc_lector_hashed@gmail.com",
