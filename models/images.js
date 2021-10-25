@@ -16,3 +16,20 @@ module.exports.createImageLector = async (files) => {
         "id": image.affectedRows,
     }
 }
+
+module.exports.getImageByIdAutor = async (id) => {
+    const images = await request(`SELECT * FROM imagenes WHERE id = ${id} AND type = 'AUTOR'`)
+
+    return images[0]
+}
+
+module.exports.createImageAutor = async (files) => {
+    const image = await request(`
+        INSERT INTO imagenes(path, upload_date, type)
+        VALUES ${files.map((file) => `('${file.path}', NOW(), 'AUTOR')`).toString()}
+    `)
+
+    return {
+        "id": image.affectedRows,
+    }
+}

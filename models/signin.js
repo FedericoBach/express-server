@@ -12,7 +12,7 @@ module.exports.signinLector = async (user, password) => {
     `)
 
     if(data.length && comparePassword(password, data[0].password)){
-        delete password
+        delete data[0].password
         return {
             user: data[0],
             existUser: true
@@ -35,7 +35,7 @@ module.exports.signinAutor = async (user, password) => {
     `)
 
     if(data.length && comparePassword(password, data[0].password)){
-        delete password
+        delete data[0].password
         return {
             user: data[0],
             existUser: true
