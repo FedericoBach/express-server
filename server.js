@@ -1,22 +1,25 @@
 const express = require('express')
-const handlebars = require('express-handlebars')
-
-const booksRoutes = require('./routes/booksRoutes')
-const autorsRoutes = require('./routes/autorsRoutes')
-
 const app = express()
 
-app.set('view engine', 'hbs')
+//////////////////// seteando el motor de plantillas handlebars
+const handlebars = require('express-handlebars').create({defaultLayout: 'index' , extname: '.hbs'});
+////////////////////
 
-app.engine('hbs', handlebars({
-    layoutsDir: `${__dirname}/views/layouts`,
-    partialsDir: `${__dirname}/views/partials`,
-    extname: 'hbs'
-}))
+const booksRoutes = require('./routes/booksRoutes')   // rutas hechas mudulo
+const autorsRoutes = require('./routes/autorsRoutes')
+
+
+
+/////////////////////////////////////// seteando el motor de plantillas handlebars
+app.engine( '.hbs' , handlebars.engine);
+app.set('view engine', 'hbs')
+//////////////////////////////////////
+
 
 app.get("/", (req, res) => res.send("hola mundo"))
 
 app.use("/books", booksRoutes)
 app.use("/autors", autorsRoutes)
 
-app.listen(5000, () => console.log("Servidor levantado en el puerto", 5000))
+const port = 5000
+app.listen(port, () => console.log(`Servidor levantado en el puerto ${port}`))
